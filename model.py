@@ -8,7 +8,7 @@ import numpy as np
 
 # Step 1 - load_housing
 def load_housing() -> pd.DataFrame:
-    # TODO: Download housing.tgz once into tempfile.gettempdir() and read housing/housing.csv from it.
+    
     path = os.path.join(tempfile.gettempdir(), "housing.tgz")
 
     if not os.path.isfile(path):
