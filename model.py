@@ -22,29 +22,27 @@ def load_housing() -> pd.DataFrame:
 # Step 2 - income_categories
 def income_categories(df):
     return pd.cut(df['median_income'], bins=[0.0,1.5,3.0,4.5,6.0,np.inf], labels=[1,2,3,4,5]).astype(int)
-    # 
 
 # Step 3 - stratified_split
 from sklearn.model_selection import train_test_split
 
 def stratified_split(df, test_size=0.2, random_state=42):
-    # Split the data into training and test set stratified by income category. This ensures that the test and train dataset have the same percentage of each income category as the original.
-    
+
     strata = income_categories(df)
 
     train_set, test_set = train_test_split(df, test_size=test_size, random_state=random_state, stratify=strata)
+
     return train_set,test_set
 
 # Step 4 - explore_correlations
 def explore_correlations(df):
-    # Pearson correlation of every numeric column with median_house_value, sorted descending, target excluded.
+    # TODO: Pearson correlation of every numeric column with median_house_value, sorted descending, target excluded.
     corr_matrix = df.corr(numeric_only=True)
 
     return corr_matrix['median_house_value'].drop('median_house_value').sort_values(ascending=False)
 
 # Step 5 - add_ratio_features
 def add_ratio_features(df):
-    # TODO: Return a copy with rooms_per_house, bedrooms_ratio and people_per_house columns added.
     df_fe = df.copy()
 
     df_fe['rooms_per_house'] = df_fe['total_rooms'] / df_fe['households']
