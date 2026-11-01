@@ -157,7 +157,6 @@ def dummy_baseline_rmse(X, y):
 from sklearn.model_selection import cross_val_score
 
 def cross_val_rmse(model, X, y, cv=3):
-    # TODO: cross_val_score with neg_root_mean_squared_error; return {'scores': [...], 'mean': ..., 'std': ...}.
     neg_score = cross_val_score(
         model, X, y, scoring='neg_root_mean_squared_error',cv=cv
     )
